@@ -1,137 +1,106 @@
-#Generates a phrase dataset for an AI powered chatbox
+#Generates a phrase dataset for an AI powered chatbot
 #In addition to generating different phrases and categories, this program also labels and separates the output by intent
+import random
+
 inventory = ["VMs", "security groups", "NICs", "route tables", "rules", "networks", "CIDRs", "subnets", "subscriptions", "resource groups"]
 attribute = ["location", "status", "utilization", "events", "faults", "cost", "created", "deleted"]
 timeStamp = ["yesterday", "last week", "last month"]
 month = ["January", "February", "March"]
 #Category 1: Inventory with Attribute at Time
-def cat1():
-  data = ""
-  w = ""
-  y = ""
-  z = ""
-  questions = ["What are the " + y + "in" + z + " at " + w + "?", "Can I see the " + y + " in " + z + " at " + w + "?", "Show me all of " + y + "in " + z + " at " + w + ".", "Give me information on " + y + "in " + z + " at " + w + ".", "I need information on " + y + " in " + z + " at " + w + ".", "Access all " + y + " in " + z + " at " + w + ".", "Find all" + y + " in " + z + " at " + w + "." , "I want all" + y + " in " + z + " at " + w + ".", "I want to see all " + y + " in " + z + " at " + w + ".", "Can I access " + y + " in " + z + " at " + w + ".", "Open information on" + y + " in " + z + " at " + w + "."]
-  for question in range(len(questions)):
-    for inventoryItem in inventory:
-      for attributeItem in attribute:
-        for timeItem in timeStamp:
-          questions = ["What are the {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modifiction|attribute} at {" + timeItem + "|time}?", "Can I see the " + inventoryItem + " in " + attributeItem + " at " + timeItem + "?", "Show me all of " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Give me information on " + inventoryItem + "in " + attributeItem + " at " + timeItem + ".", "I need information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + " at " + timeItem + ".", "Access all " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Find all " + inventoryItem + " in " + attributeItem + " at " + timeItem + "." , "I want all " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "I want to see all " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Can I access " + inventoryItem + " in " + attributeItem + " at " + timeItem + "?", "Open information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Send me information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Report information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Give me information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "I want information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Give me all " + attributeItem + inventoryItem + "at" + timeItem + ".", "Access all " + attributeItem + inventoryItem + "at" + timeItem + ".", "I want information on " + attributeItem + inventoryItem + "at" + timeItem + ".", "Find all " + attributeItem + inventoryItem + "at" + timeItem + "."]
-          data += "\n" + questions[question]
-          print(questions[question])
-  for question in range(len(questions)):
-    for inventoryItem in inventory:
-      for attributeItem in attribute:
-        for monthTime in month:
-          for day in range(1,31):
-            questions = ["What are the " + inventoryItem + " in " + attributeItem + " at " + timeItem + "?", "Can I see the " + inventoryItem + " in " + attributeItem + " at " + timeItem + "?", "Show me all of " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Give me information on " + inventoryItem + "in " + attributeItem + " at " + timeItem + ".", "I need information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + " at " + timeItem + ".", "Access all " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Find all " + inventoryItem + " in " + attributeItem + " at " + timeItem + "." , "I want all " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "I want to see all " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Can I access " + inventoryItem + " in " + attributeItem + " at " + timeItem + "?", "Open information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Send me information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Report information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Give me information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "I want information on " + inventoryItem + " in " + attributeItem + " at " + timeItem + ".", "Give me all " + attributeItem + " " + inventoryItem + " at " + timeItem + ".", "Access all " + attributeItem + " " + inventoryItem + " at " + timeItem + ".", "I want information on " + attributeItem + " " + inventoryItem + " at " + timeItem + ".", "Find all " + attributeItem + " " + inventoryItem + " at " + timeItem + ".", "Give me all " + attributeItem + " " + inventoryItem + " at " + timeItem + ".", "Access all " + attributeItem + " " + inventoryItem + " at " + timeItem + ".", "I want information on " + attributeItem + " " + inventoryItem + " at " + timeItem + ".", "Find all " + attributeItem + " " + inventoryItem + " at " + timeItem + "."]
-            timeItem = monthTime + " " + str(day) + ", " + "2021"
-            data += "\n" + questions[question]
-            print(questions[question])
-  with open("intent1.txt", "w") as f:
-    f.write(data)
+def genObject(length):
+  name = ""
+  lower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+  upper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+  for letter in range(length):
+    case =  random.randint(1,2)
+    if case == 1:
+      name += lower[random.randint(0, 25)]
+    elif case == 2:
+      name += upper[random.randint(0, 25)]
+  return name
+def cat1(number, *objectParam):
+  data = []
+  inventoryItem = inventory[random.randint(0, len(inventory)-1)]
+  attributeItem = attribute[random.randint(0, len(inventory)-1)]
+  objectItem = ""
+  timeItem = "Jan 1, 2021"
+  nonObjectQuestions = ["What are the {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|time}?", "Can I see the {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "?", "Show me all of {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Give me information on {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "I need information on {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Access all {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Find all {" + inventoryItem + "|class|primary}  in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}." , "I want all {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "I want to see all {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Can I access {" + inventoryItem + "|class|primary}  in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}?", "Open information on {" + inventoryItem + "|class|primary}  in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Send me information on {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Report information on {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Give me information on {" + inventoryItem + "|class|primary}  in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "I want information on {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|primary} at " + timeItem + "|sys_time}.", "Give me all {" + attributeItem + "|modification|attribute} {" + inventoryItem + "|class|primary} at " + timeItem + "|sys_time}.", "Access all {" + attributeItem + "|modification|attribute} {" + inventoryItem + "|class|primary} at " + timeItem + "|sys_time}.", "I want information on {" + attributeItem + "|modification|attribute} {" + inventoryItem + "|class|primary} at " + timeItem + ".", "Find all {" + attributeItem + "|modification|attribute} {" + inventoryItem + "|class|primary} at " + timeItem + "|sys_time}."]
+  objectQuestions = ["Give me the {" + attributeItem + "|modification|attribute} of the {" + inventoryItem + "|class|primary} that were associated to {" + objectItem + "|object|secondary} {" + timeItem + "}"]
+  if objectParam == None:
+    for iteration in range(number):
+      data.append(nonObjectQuestions[random.randint(0, len(nonObjectQuestions)-1)])
+    return data
+  elif objectParam == "random":
+    for iteration in range(number):
+      objectItem = genObject(random.randint(5, 12))
+      for iteration in range(number):
+        data.append(objectQuestions[random.randint(0,len(objectQuestions)-1)])
+
+  else:
+    pass
 #Category 2: Attribute of Inventory at Time
-def cat2():
-  data = ""
-  y = ""
-  z = ""
-  w = ""
-  questions = ["Show me the " + z + " of " + y + " at " + w + "?", z + " of " + y + " at " + w, "What is " + z + " of " + y + " at " + w + "?", "Show " + z + " of " + y + " at " + w, "Which ones have " + z + " of " + y + " at " + w, "Give me the " + z + " of " + y + " at " + w, "Are there any "  + z + " of " + y + " at " + w, "Show the "  + z + " of " + y + " at " + w]  
-  for question in range(len(questions)):
-    for inventoryItem in inventory:
-      for attributeItem in attribute:
-        for timeItem in timeStamp:
-          questions = ["Show me the " + inventoryItem + " of " + attributeItem + " at " + timeItem + "?", inventoryItem + " of " + attributeItem + " at " + timeItem, "What is " + inventoryItem + " of " + attributeItem + " at " + timeItem + "?", "Show " + inventoryItem + " of " + attributeItem + " at " + timeItem, "Which ones have " + inventoryItem + " of " + attributeItem + " at " + timeItem, "Give me the " + inventoryItem + " of " + attributeItem + " at " + timeItem, "Are there any "  + inventoryItem + " of " + attributeItem + " at " + timeItem, "Show the "  + inventoryItem + " of " + attributeItem + " at " + timeItem]
-          data += "\n" + questions[question]
-          print(questions[question])
-  for question in range(len(questions)):
-    for inventoryItem in inventory:
-      for attributeItem in attribute:
-        for monthTime in month:
-          for day in range(1,31):
-            questions = ["Show me the " + inventoryItem + " of " + attributeItem + " at " + timeItem + "?", inventoryItem + " of " + attributeItem + " at " + timeItem, "What is " + inventoryItem + " of " + attributeItem + " at " + timeItem + "?", "Show " + inventoryItem + " of " + attributeItem + " at " + timeItem, "Which ones have " + inventoryItem + " of " + attributeItem + " at " + timeItem, "Give me the " + inventoryItem + " of " + attributeItem + " at " + timeItem, "Are there any "  + inventoryItem + " of " + attributeItem + " at " + timeItem, "Show the "  + inventoryItem + " of " + attributeItem + " at " + timeItem]
-            timeItem = monthTime + str(day) + ", 2021"
-            data += "\n" + questions[question]
-            print(questions[question])
-  with open("intent2.txt", "w") as f:
-    f.write(data)
-
+def cat2(number):
+  data = []
+  inventoryItem = inventory[random.randint(0, len(inventory)-1)]
+  attributeItem = attribute[random.randint(0, len(inventory)-1)]
+  timeItem = "Jan 1, 2021"
+  questions = ["Show me the {" + attributeItem + "|modification|attribute} of {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}" + "?", "{" + attributeItem + "|modification|attribute} of {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}", "What is {" + attributeItem + "|modification|attribute} of {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}" + "?", "Show {" + attributeItem + "|modification|attribute} of {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}", "Which ones have {" + attributeItem + "|modification|attribute} of {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}", "Give me the {" + attributeItem + "|modification|attribute} of {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}", "Are there any {" + attributeItem + "|modification|attribute} of {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}", "Show the {"  + attributeItem + "|modification|attribute} of {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}"]
+  for iteration in range(number):
+    data.append(questions[random.randint(0, len(questions)-1)])
+  return data
 #Category 3: Time Inventory had Attribute
-def cat3():
-  data = ""
-  y = ""
-  z = ""
-  w = ""
-  questions = ["When did " + y + " have " + z, "What time did " + y + " have " + z, "Give me a time when "  + y + " had " + z, "What times did" + y + " have " + z, "At what time did " + y + " have " + z, "Give me time when "  + y + " had " + z, "Were there any times when "  + y + " had " + z]
-  for question in range(len(questions)):
-    for inventoryItem in inventory:
-      for attributeItem in attribute:
-        for timeItem in timeStamp:
-          questions = ["When did " + inventoryItem + " have " + attributeItem, "What time did " + inventoryItem + " have " + attributeItem, "Give me a time when "  + inventoryItem + " had " + attributeItem, "What times did" + inventoryItem + " have " + attributeItem, "At what time did " + inventoryItem + " have " + attributeItem, "Give me time when "  + inventoryItem + " had " + attributeItem, "Were there any times when "  + inventoryItem + " had " + attributeItem]
-          data += "\n" + questions[question]
-          print(questions[question])
-  for question in range(len(questions)):
-    for inventoryItem in inventory:
-      for attributeItem in attribute:
-        for monthTime in month:
-          for day in range(1,31):
-            questions = ["When did " + inventoryItem + " have " + attributeItem, "What time did " + inventoryItem + " have " + attributeItem, "Give me a time when "  + inventoryItem + " had " + attributeItem, "What times did" + inventoryItem + " have " + attributeItem, "At what time did " + inventoryItem + " have " + attributeItem, "Give me time when "  + inventoryItem + " had " + attributeItem, "Were there any times when "  + inventoryItem + " had " + attributeItem]
-            timeItem = monthTime + str(day) + ", 2021"
-            data += "\n" + questions[question]
-            print(questions[question])
-  with open("intent3.txt", "w") as f:
-    f.write(data)
-
+def cat3(number, objectParam):
+  data = []
+  inventoryItem = inventory[random.randint(0, len(inventory)-1)]
+  attributeItem = attribute[random.randint(0, len(inventory)-1)]
+  timeItem = "Jan 1, 2021"
+  questions = ["When did {" + inventoryItem + "|class|primary} have {" + attributeItem + "|modification|attribute}", "What time did {" + inventoryItem + "|class|primary} have {" + attributeItem + "|modification|attribute}", "Give me a time when {" + inventoryItem + "|class|primary} had {" + attributeItem + "|modification|attribute}", "What times did {" + inventoryItem + "|class|primary} have {" + attributeItem + "|modification|attribute}", "At what time did {" + inventoryItem + "|class|primary} have {" + attributeItem + "|modification|attribute}", "Give me time when {" + inventoryItem + "|class|primary} had {" + attributeItem + "|modification|attribute}", "Were there any times when {" + inventoryItem + "|class|primary} had {" + attributeItem + "|modification|attribute}"]
+  for iteration in range(number):
+    data.append(questions[random.randint(0, len(questions)-1)])
+  return data
 #Category 4: How many Inventory have Attribute at Time
-def cat4():
-  data = ""
-  x = ""
-  y = ""
-  z = ""
-  questions = ["How many " + y + " were " + x +" at " + z, "How much " + y + " were " + x +" at " + z, "What number of " + y + " were " + x +" at " + z, "How many " + y + " were " + x +" at " + z, "Give me the number of " + y + " were " + x +" at " + z, "Give me the amount of " + y + " were " + x +" at " + z, "What amount of " + y + " were " + x +" at " + z, "What is the size of " + y + " were " + x +" at " + z, "What volume of " + y + " were " + x +" at " + z, "What quantity of " + y + " were " + x +" at " + z, "Give me the volume of" + y + " that were " + x +" at " + z, "Give me the size " + y + " that were " + x +" at " + z, "Give me the quantity of " + y + " that were " + x +" at " + z]
-  for question in range(len(questions)):
-    for inventoryItem in inventory:
-      for attributeItem in attribute:
-        for timeItem in timeStamp:
-          questions = ["How many " + inventoryItem + " were " + attributeItem +" at " + timeItem, "How much " + inventoryItem + " were " + attributeItem +" at " + timeItem, "What number of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "How many " + inventoryItem + " were " + attributeItem +" at " + timeItem, "Give me the number of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "Give me the amount of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "What amount of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "What is the size of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "What volume of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "What quantity of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "Give me the volume of" + inventoryItem + " that were " + attributeItem +" at " + timeItem, "Give me the size " + inventoryItem + " that were " + attributeItem +" at " + timeItem, "Give me the quantity of " + inventoryItem + " that were " + attributeItem +" at " + timeItem]
-          data += "\n" + questions[question]
-          print(questions[question])
-  for question in range(len(questions)):
-    for inventoryItem in inventory:
-      for attributeItem in attribute:
-        for monthTime in month:
-          for day in range(1,31):
-            questions = ["How many " + inventoryItem + " were " + attributeItem +" at " + timeItem, "How much " + inventoryItem + " were " + attributeItem +" at " + timeItem, "What number of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "How many " + inventoryItem + " were " + attributeItem +" at " + timeItem, "Give me the number of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "Give me the amount of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "What amount of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "What is the size of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "What volume of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "What quantity of " + inventoryItem + " were " + attributeItem +" at " + timeItem, "Give me the volume of" + inventoryItem + " that were " + attributeItem +" at " + timeItem, "Give me the size " + inventoryItem + " that were " + attributeItem +" at " + timeItem, "Give me the quantity of " + inventoryItem + " that were " + attributeItem +" at " + timeItem]
-            timeItem = monthTime + str(day) + ", 2021"
-            data += "\n" + questions[question]
-            print(questions[question])
-  with open("intent4.txt", "w") as f:
-    f.write(data)
-def cat5():
-  data = ""
-  x = ""
-  y = ""
-  z = ""
-  questions = ["How many " + x + " occured on " + y + " at " + z, "Which " + y + " did the " + x + " occur on at " + z, "Tell me the number of "  + x + " that occured on " + y + " at" + z, "Show me how many " + x + " happened to the " + y + " at " + z, "Report to me how many " + x + " happened to " + y + " at " + z, "Display the" + y + " which " + x + " happened to at " + z]
-  for question in range(len(questions)):
-    for inventoryItem in inventory:
-      for attributeItem in attribute:
-        for timeItem in timeStamp:
-          questions = ["How many " + attributeItem + " occured on " + inventoryItem + " at " + timeItem, "Which " + inventoryItem + " did the " + attributeItem + " occur on at " + timeItem, "Tell me the number of "  + attributeItem + " that occured on " + inventoryItem + " at" + timeItem, "Show me how many " + attributeItem + " happened to the " + inventoryItem + " at " + timeItem, "Report to me how many " + attributeItem + " happened to " + inventoryItem + " at " + timeItem, "Display the " + inventoryItem + " which " + attributeItem + " happened to at " + timeItem]
-          data += "\n" + questions[question]
-          print(questions[question])
-  for question in range(len(questions)):
-    for inventoryItem in inventory:
-      for attributeItem in attribute:
-        for monthTime in month:
-          for day in range(1,31):
-            questions = ["How many " + attributeItem + " occured on " + inventoryItem + " at " + timeItem, "Which " + inventoryItem + " did the " + attributeItem + " occur on at " + timeItem, "Tell me the number of "  + attributeItem + " that occured on " + inventoryItem + " at" + timeItem, "Show me how many " + attributeItem + " happened to the " + inventoryItem + " at " + timeItem, "Report to me how many " + attributeItem + " happened to " + inventoryItem + " at " + timeItem, "Display the " + inventoryItem + " which " + attributeItem + " happened to at " + timeItem]
-            timeItem = monthTime + str(day) + ", 2021"
-            data += "\n" + questions[question]
-            print(questions[question])
-  with open("intent5.txt", "w") as f:
-    f.write(data)
-cat1()
-cat2()
-cat3()
-cat4()
-cat5()
+def cat4(number):
+  data = []
+  inventoryItem = inventory[random.randint(0, len(inventory)-1)]
+  attributeItem = attribute[random.randint(0, len(inventory)-1)]
+  timeItem = "Jan 1, 2021"
+  questions = ["How many {" + inventoryItem + "|class|primary} were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "How much {" + inventoryItem + "|class|primary} were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "What number of {" + inventoryItem + "|class|primary} were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "How many {" + inventoryItem + "|class|primary} were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "Give me the number of {" + inventoryItem + "|class|primary} that were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "Give me the amount of {" + inventoryItem + "|class|primary} that were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "What amount of {" + inventoryItem + "|class|primary} were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "What is the size of {" + inventoryItem + "|class|primary} were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "What volume of {" + inventoryItem + "|class|primary} were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "What quantity of {" + inventoryItem + "|class|primary} were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "Give me the volume of {" + inventoryItem + "|class|primary} that were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "Give me the size of {" + inventoryItem + "|class|primary} that were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}", "Give me the quantity of {" + inventoryItem + "|class|primary} that were {" + attributeItem +"|modification|attribute} at {" + timeItem+ "|sys_time}"]
+  for iteration in range(number):
+    data.append(questions[random.randint(0, len(questions)-1)])
+  return data
+def cat5(number):
+  data = []
+  inventoryItem = inventory[random.randint(0, len(inventory)-1)]
+  attributeItem = attribute[random.randint(0, len(inventory)-1)]
+  timeItem = "Jan 1, 2021"
+  questions = ["How many {" + attributeItem + " |modification|attribute} occured on {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}", "Which {" + inventoryItem + "|class|primary}did the {" + attributeItem + "|modification|attribute} occur on at {" + timeItem + "|sys_time}", "Tell me the number of {"  + attributeItem + "|modification|attribute} that occured on {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}", "Show me how many {" + attributeItem + "|modification|attribute} happened to the {" + inventoryItem + "|class|primary} at {" + timeItem + "|sys_time}", "Report to me how many {" + attributeItem + "|modification|attribute} happened to {" + inventoryItem + " |class|primary} at {" + timeItem + "|sys_time}", "Display the {" + inventoryItem + "|class|primary} which {" + attributeItem + "|modification|attribute} happened to at {" + timeItem + "|sys_time}"]
+  for iteration in range(number):
+    data.append(questions[random.randint(0, len(questions)-1)])
+  return data
+def genQuestions(**parameters):
+  objectParam = "random"#is currently set as a vriable to fix bug, will be set as an actual parameter later
+  for parameter in parameters:
+    if parameter == "cat1":
+      print("Category 1 Questions:")
+      for phrase in cat1(parameters.get(parameter), objectParam):
+        print(phrase)
+    elif parameter == "cat2":
+      print("Category 2 Questions:")
+      for phrase in cat2(parameters.get(parameter), objectParam):
+        print(phrase)
+    elif parameter == "cat3":
+      print("Category 3 Questions:")
+      for phrase in cat3(parameters.get(parameter), objectParam):
+        print(phrase)
+    elif parameter == "cat4":
+      print("Category 4 Questions:")
+      for phrase in cat4(parameters.get(parameter), objectParam):
+        print(phrase)
+    elif parameter == "cat5":
+      print("Category 5 Questions:")
+      for phrase in cat1(parameters.get(parameter)), objectParam:
+        print(phrase)
+    else:
+      print("Parameter " + parameter + " is not recognized")
+      return None
+genQuestions(cat3=4)
