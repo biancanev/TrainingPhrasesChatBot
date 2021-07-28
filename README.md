@@ -23,6 +23,7 @@ This program uses the function `genQuestions(objects, **cat1, **cat2, **cat3, **
 | `**cat1` | Determines how many `cat1` phrases the generator should generate. This is a kwarg.|
 | `**cat1` | Determines how many `cat1` phrases the generator should generate. This is a kwarg.|
 | `**cat1` | Determines how many `cat1` phrases the generator should generate. This is a kwarg.|
+
 Therefore this code:
 ```python
 genQuestions(None, cat1=1, cat3=1)
