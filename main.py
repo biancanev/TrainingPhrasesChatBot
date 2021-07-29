@@ -60,11 +60,12 @@ def cat1(number, objectParam, dateType):
       else:
         data.append(nonObjectQuestions[random.randint(0, len(nonObjectQuestions)-1)])
     return data
-
-  else:
+  elif objectParam == "given":
     pass
+  else:
+    cat1(number, "random", dateType)
 #Category 2: Attribute of Inventory at Time
-def cat2(number):
+def cat2(number, objectParam, dateType):
   data = []
   inventoryItem = inventory[random.randint(0, len(inventory)-1)]
   attributeItem = attribute[random.randint(0, len(attribute)-1)]
@@ -74,7 +75,7 @@ def cat2(number):
     data.append(questions[random.randint(0, len(questions)-1)])
   return data
 #Category 3: Time Inventory had Attribute
-def cat3(number):
+def cat3(number, objectParam, dateType):
   data = []
   inventoryItem = inventory[random.randint(0, len(inventory)-1)]
   attributeItem = attribute[random.randint(0, len(attribute)-1)]
@@ -84,7 +85,7 @@ def cat3(number):
     data.append(questions[random.randint(0, len(questions)-1)])
   return data
 #Category 4: How many Inventory have Attribute at Time
-def cat4(number):
+def cat4(number, objectParam, dateType):
   data = []
   inventoryItem = inventory[random.randint(0, len(inventory)-1)]
   attributeItem = attribute[random.randint(0, len(attribute)-1)]
@@ -93,7 +94,7 @@ def cat4(number):
   for iteration in range(number):
     data.append(questions[random.randint(0, len(questions)-1)])
   return data
-def cat5(number):
+def cat5(number, objectParam, dateType):
   data = []
   inventoryItem = inventory[random.randint(0, len(inventory)-1)]
   attributeItem = attribute[random.randint(0, len(attribute)-1)]
@@ -111,25 +112,25 @@ def genQuestions(category1=0, category2=0, category3=0, category4=0, category5=0
       print("Category 1 Questions:")
       for phrase in cat1(category1, objectParam, dateType):
         print(phrase)
-        output.append(phrase)
+        output.append(phrase, objectParam, dateType)
     if category2 != 0:
       print("Category 2 Questions:")
-      for phrase in cat2(category2):
+      for phrase in cat2(category2, objectParam, dateType):
         print(phrase)
         output.append(phrase)
     if category3 != 0:
       print("Category 3 Questions:")
-      for phrase in cat3(category3):
+      for phrase in cat3(category3, objectParam, dateType):
         print(phrase)
         output.append(phrase)
     if category4 != 0:
       print("Category 4 Questions:")
-      for phrase in cat4(category4):
+      for phrase in cat4(category4, objectParam, dateType):
         print(phrase)
         output.append(phrase)
     if category5 != 0:
       print("Category 5 Questions:")
-      for phrase in cat5(category5):
+      for phrase in cat5(category5, objectParam, dateType):
         print(phrase)
         output.append(phrase)
   elif objectParam == "random":
@@ -140,22 +141,22 @@ def genQuestions(category1=0, category2=0, category3=0, category4=0, category5=0
         output.append(phrase)
     if category2 != 0:
       print("Category 2 Questions:")
-      for phrase in cat2(category2):
+      for phrase in cat2(category2, objectParam, dateType):
         print(phrase)
         output.append(phrase)
     if category3 != 0:
       print("Category 3 Questions:")
-      for phrase in cat3(category3):
+      for phrase in cat3(category3, objectParam, dateType):
         print(phrase)
         output.append(phrase)
     if category4 != 0:
       print("Category 4 Questions:")
-      for phrase in cat4(category4):
+      for phrase in cat4(category4, objectParam, dateType):
         print(phrase)
         output.append(phrase)
     if category5 != 0:
       print("Category 5 Questions:")
-      for phrase in cat5(category5):
+      for phrase in cat5(category5, objectParam, dateType):
         print(phrase)
         output.append(phrase)
   elif objectParam == "given":
@@ -166,22 +167,22 @@ def genQuestions(category1=0, category2=0, category3=0, category4=0, category5=0
         output.append(phrase)
     if category2 != 0:
       print("Category 2 Questions:")
-      for phrase in cat2(category2):
+      for phrase in cat2(category2, objectParam, dateType):
         print(phrase)
         output.append(phrase)
     if category3 != 0:
       print("Category 3 Questions:")
-      for phrase in cat3(category3):
+      for phrase in cat3(category3, objectParam, dateType):
         print(phrase)
         output.append(phrase)
     if category4 != 0:
       print("Category 4 Questions:")
-      for phrase in cat4(category4):
+      for phrase in cat4(category4, objectParam, dateType):
         print(phrase)
         output.append(phrase)
     if category5 != 0:
       print("Category 5 Questions:")
-      for phrase in cat5(category5):
+      for phrase in cat5(category5, objectParam, dateType):
         print(phrase)
         output.append(phrase)
   return output
