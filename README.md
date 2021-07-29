@@ -22,7 +22,7 @@ This program uses the function `genQuestions(category1, category2, category3, ca
 | `category3`(int) | Determines how many `Category 3` phrases the generator should generate. Default is `0`.|
 | `category4`(int) | Determines how many `Category 4` phrases the generator should generate. Default is `0`.|
 | `category5`(int) | Determines how many `Category 5` phrases the generator should generate. Default is `0`.|
-| `objectParam`(str) | Determines whether the program should include `objects` during generation. Acceptable parameters include: `"none"`, `""random"`, and `"given"`. `"none"` will not use objects when generating phrases. `"random"` will call the function `genObjects()` and generate a random string for an object. `"given"` will iterate through the given list in `objectList` to create a unique phrase. Default is `"none"`|
+| `objectParam`(str) | Determines whether the program should include `objects` during generation. Acceptable parameters include: `"none"`, `""random"`, and `"given"`. `"none"` will not use objects when generating phrases. `"random"` will call the function `genObjects()` and generate a random string for an object 20% of the time. The rest will be a normal output with no object. `"given"` will iterate through the given list in `objectList` to create a unique phrase. Default is `"random"`|
 | `objectList`(tup) | If `objectParam` is `"given"`, the generator will iterate through the given list in category n given `(n, [])`. Default is `(0, [])`.|
 | `dateType`(int) | Sets the format of dates used in generating times. `1` is MM/DD/YYYY. `2` is DD/MM/YYYY. `3` is YYYY/MM/DD. `4` is MM DD, YYYY. Default is `4` |
 
@@ -36,5 +36,5 @@ Category 1 Phrases:
 What are the {VMs|class|primary} correlated to {VM1|object|secondary} in {deleted|modification|attribute} at {April 21, 2021|time}?
 
 Category 3 Phrases:
-Were there any times when {security groups|class|primary} pertaining to {sec_gr} had {faults|modification|attribute}
+Were there any times when {security groups|class|primary} pertaining to {sec_group3} had {faults|modification|attribute}
 ```
