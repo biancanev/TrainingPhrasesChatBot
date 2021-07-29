@@ -29,16 +29,17 @@ def genObject(length):
     elif case == 2:
       name += upper[random.randint(0, 25)]
   return name
-def cat1(number, objectParam):
+def cat1(number, objectParam, dateType):
   data = []
   inventoryItem = inventory[random.randint(0, len(inventory)-1)]
   attributeItem = attribute[random.randint(0, len(inventory)-1)]
   objectItem = genObject(random.randint(5, 12))
-  timeItem = "Jan 1, 2021"
+  timeItem = genDate(dateType)
   nonObjectQuestions = ["What are the {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|time}?", "Can I see the {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "?", "Show me all of {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Give me information on {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "I need information on {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Access all {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Find all {" + inventoryItem + "|class|primary}  in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}." , "I want all {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "I want to see all {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Can I access {" + inventoryItem + "|class|primary}  in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}?", "Open information on {" + inventoryItem + "|class|primary}  in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Send me information on {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Report information on {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "Give me information on {" + inventoryItem + "|class|primary}  in {" + attributeItem + "|modification|attribute} at {" + timeItem + "|sys_time}.", "I want information on {" + inventoryItem + "|class|primary} in {" + attributeItem + "|modification|primary} at " + timeItem + "|sys_time}.", "Give me all {" + attributeItem + "|modification|attribute} {" + inventoryItem + "|class|primary} at " + timeItem + "|sys_time}.", "Access all {" + attributeItem + "|modification|attribute} {" + inventoryItem + "|class|primary} at " + timeItem + "|sys_time}.", "I want information on {" + attributeItem + "|modification|attribute} {" + inventoryItem + "|class|primary} at " + timeItem + ".", "Find all {" + attributeItem + "|modification|attribute} {" + inventoryItem + "|class|primary} at " + timeItem + "|sys_time}."]
   objectQuestions = ["Give me the {" + attributeItem + "|modification|attribute} of the {" + inventoryItem + "|class|primary} that were associated to {" + objectItem + "|object|secondary} on {" + timeItem + "}"]
   if objectParam == "none":
     for phrase in range(number):
+      timeItem = genDate(dateType)
       data.append(nonObjectQuestions[random.randint(0, len(nonObjectQuestions)-1)])
     return data
   elif objectParam == "random":
@@ -97,43 +98,43 @@ def genQuestions(category1=0, category2=0, category3=0, category4=0, category5=0
   if objectParam == "none":
     if category1 != 0:
       print("Category 1 Questions:")
-      for phrase in cat1(category1, objectParam):
+      for phrase in cat1(category1, objectParam, dateType):
         print(phrase)
-    elif category2 != 0:
+    if category2 != 0:
       print("Category 2 Questions:")
       for phrase in cat2(category2):
         print(phrase)
-    elif category3 != 0:
+    if category3 != 0:
       print("Category 3 Questions:")
       for phrase in cat3(category3):
         print(phrase)
-    elif category4 != 0:
+    if category4 != 0:
       print("Category 4 Questions:")
       for phrase in cat4(category4):
         print(phrase)
-    elif category5 != 0:
+    if category5 != 0:
       print("Category 5 Questions:")
       for phrase in cat5(category5):
         print(phrase)
   elif objectParam == "random":
     if category1 != 0:
       print("Category 1 Questions:")
-      for phrase in cat1(category1, objectParam):
+      for phrase in cat1(category1, objectParam, dateType):
         print(phrase)
-    elif category2 != 0:
+    if category2 != 0:
       print("Category 2 Questions:")
       for phrase in cat2(category2):
         print(phrase)
-    elif category3 != 0:
+    if category3 != 0:
       print("Category 3 Questions:")
       for phrase in cat3(category3):
         print(phrase)
-    elif category4 != 0:
+    if category4 != 0:
       print("Category 4 Questions:")
       for phrase in cat4(category4):
         print(phrase)
-    elif category5 != 0:
+    if category5 != 0:
       print("Category 5 Questions:")
       for phrase in cat5(category5):
         print(phrase)
-genQuestions(category1=3, objectParam="random")
+genQuestions(category1=3, category3=1 ,objectParam="random", dateType=3)
